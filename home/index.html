@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimal Startpage</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #31404d;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            text-align: center;
+        }
+        a {
+            color: #c6c6ca;
+            text-decoration: none;
+            font-size: 18px;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="https://youtube.com">yt</a>
+        <a href="https://boards.4chan.org/g/">/g/</a>
+        <a href="https://example.com">link1</a>
+        <a href="https://example.com">link2</a>
+        <a href="https://example.com">link3</a>
+        <a href="https://example.com">link4</a>
+    </div>
+</body>
+</html>
