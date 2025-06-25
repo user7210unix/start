@@ -8,54 +8,81 @@
     <link rel="icon" href="assets/images/favicon.png" type="image/png">
 </head>
 <body>
+    <!-- SVG Filter for Liquid Glass Effect -->
+    <svg style="position: absolute; width: 0; height: 0;">
+        <filter id="glass-distortion">
+            <feTurbulence type="fractalNoise" baseFrequency="0.01" numOctaves="2" result="noise"/>
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="5" xChannelSelector="R" yChannelSelector="G"/>
+        </filter>
+    </svg>
+
     <div class="container">
-        <input class="search-bar" type="text" placeholder="Search" onkeypress="if(event.key === 'Enter') window.location.href='https://www.google.com/search?q='+this.value">
+        <input class="search-bar" type="text" placeholder="Search" onkeypress="if(event.key === 'Enter') window.location.href='https://www.startpage.com/search?q='+this.value">
 
-        <div class="grid">
+        <div class="main-grid">
+            <div class="grid">
+                <!-- Card 2 -->
+                <div class="card liquid-glass">
+                    <div class="card-inner">
+                        <label><a href="https://redlib.catsarch.com" target="_blank">R/</a></label>
+                    </div>
+                </div>
 
-            <!-- Card 2 -->
-            <div class="card">
-                <div class="card-inner">
-                    <label><a href="https://redlib.catsarch.com" target="_blank">R/</a></label>
+                <!-- Card 3 -->
+                <div class="card liquid-glass">
+                    <div class="card-inner">
+                        <label><a href="https://outlook.office365.com/mail/" target="_blank">Outlook</a></label>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="card liquid-glass">
+                    <div class="card-inner">
+                        <label><a href="https://teams.microsoft.com/v2/" target="_blank">Teams</a></label>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="card liquid-glass">
+                    <div class="card-inner">
+                        <label><a href="https://www.github.com/user7210unix" target="_blank">GitHub</a></label>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="card liquid-glass">
+                    <div class="card-inner">
+                        <label><a href="https://redlib.catsarch.com/r/unixporn" target="_blank">r/unix</a></label>
+                    </div>
+                </div>
+
+                <!-- Card 7 -->
+                <div class="card liquid-glass">
+                    <div class="card-inner">
+                        <label><a href="https://redlib.catsarch.com/r/linuxmasterrace/" target="_blank">r/linux</a></label>
+                    </div>
                 </div>
             </div>
 
-            <!-- Card 3 -->
-            <div class="card">
-                <div class="card-inner">
-                    <label><a href="https://outlook.office365.com/mail/" target="_blank">Outlook</a></label>
-                </div>
-            </div>
-
-            <!-- Card 4 -->
-            <div class="card">
-                <div class="card-inner">
-                    <label><a href="https://teams.microsoft.com/v2/" target="_blank">Teams</a></label>
-                </div>
-            </div>
-
-            <!-- Card 5 -->
-            <div class="card">
-                <div class="card-inner">
-                    <label><a href="https://www.github.com/user7210unix" target="_blank">GitHub</a></label>
-                </div>
-            </div>
-
-            <!-- Card 6 -->
-            <div class="card">
-                <div class="card-inner">
-                    <label><a href="https://redlib.catsarch.com/r/unixporn" target="_blank">r/unix</a></label>
-                </div>
-            </div>
-
-            <!-- Card 7 -->
-            <div class="card">
-                <div class="card-inner">
-                    <label><a href="https://redlib.catsarch.com/r/linuxmasterrace/" target="_blank">r/linux</a></label>
+            <!-- Clock Container -->
+            <div class="clock-container">
+                <div class="clock-card liquid-glass">
+                    <div id="clock" class="clock">00:00:00</div>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+        }
+        updateClock();
+        setInterval(updateClock, 1000);
+    </script>
 </body>
 </html>
-
