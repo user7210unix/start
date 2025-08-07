@@ -3,42 +3,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minimal Startpage</title>
+    <title>~</title>
     <style>
-        body {
+        @font-face {
+            font-family: 'Iosevka';
+            src: url('assets/fonts/Iosevka.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #000000;
+            color: #FFFFFF;
+            font-family: 'Iosevka', monospace;
+            font-size: 17px;
+            display: flex;
             height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            display: flex;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .left-panel {
+            flex: 1;
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #31404d;
-            font-family: Arial, sans-serif;
+            padding: 20px;
         }
-        .container {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            text-align: center;
+
+        .left-panel img {
+            max-width: 100%;
+            max-height: 80vh;
+            object-fit: contain;
+            border: 1px solid #123458;
         }
-        a {
-            color: #c6c6ca;
+
+        .right-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .tree-view {
+            list-style: none;
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .tree-view li {
+            margin: 3px 0;
+        }
+
+        .category {
+            color: #FFFFFF;
+            display: flex;
+            align-items: center;
+        }
+
+        .category::before {
+            content: '> ';
+            color: #465C88;
+            margin-right: 5px;
+        }
+
+        .links {
+            list-style: none;
+            padding-left: 20px;
+        }
+
+        .links li {
+            margin: 3px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .links li::before {
+            content: '> ';
+            color: #85193C;
+            margin-right: 5px;
+        }
+
+        .links a {
+            color: #FFFFFF;
             text-decoration: none;
-            font-size: 18px;
         }
-        a:hover {
-            text-decoration: underline;
+
+        /* Minimal scrollbar */
+        .right-panel::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .right-panel::-webkit-scrollbar-track {
+            background: #000000;
+        }
+
+        .right-panel::-webkit-scrollbar-thumb {
+            background: #123458;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            .left-panel, .right-panel {
+                flex: none;
+                width: 100%;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <a href="https://youtube.com">yt</a>
-        <a href="https://boards.4chan.org/g/">/g/</a>
-        <a href="https://example.com">link1</a>
-        <a href="https://example.com">link2</a>
-        <a href="https://example.com">link3</a>
-        <a href="https://example.com">link4</a>
+        <div class="left-panel">
+            <img src="assets/images/placeholder.png" alt="Placeholder Image">
+        </div>
+        <div class="right-panel">
+            <ul class="tree-view">
+                <li>
+                    <div class="category">Social</div>
+                    <ul class="links">
+                        <li><a href="https://x.com">X</a></li>
+                        <li><a href="https://reddit.com">Reddit</a></li>
+                        <li><a href="https://discord.com">Discord</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <div class="category">Boards</div>
+                    <ul class="links">
+                        <li><a href="https://4chan.org/tech">/tech/</a></li>
+                        <li><a href="https://4chan.org/g">/g/</a></li>
+                        <li><a href="https://4chan.org/b">/b/</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <div class="category">Others</div>
+                    <ul class="links">
+                        <li><a href="https://github.com">GitHub</a></li>
+                        <li><a href="https://stackoverflow.com">StackOverflow</a></li>
+                        <li><a href="https://wikipedia.org">Wikipedia</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
     </div>
 </body>
 </html>
