@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Startpage</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 10pt;
+            padding: 8px;
+            background-color: #1d1f21;
+            color: #c5c8c6;
+        }
+
+        .wrapper {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .top-bar {
+            background-color: #282a2e;
+            border: 1px solid #373b41;
+            padding: 10px;
+            margin-bottom: 8px;
+        }
+
+        .clock {
+            font-size: 18pt;
+            font-weight: bold;
+            color: #81a2be;
+        }
+
+        .main-content {
+            background-color: #282a2e;
+            border: 1px solid #373b41;
+            padding: 10px;
+        }
+
+        .boards-bar {
+            text-align: center;
+            padding: 8px;
+            margin-bottom: 12px;
+            line-height: 1.8;
+        }
+
+        .boards-bar a {
+            color: #81a2be;
+            text-decoration: none;
+            padding: 0 6px;
+            font-weight: bold;
+            font-size: 11pt;
+        }
+
+        .boards-bar a:hover {
+            color: #cc6666;
+            text-decoration: underline;
+        }
+
+        .boards-bar span {
+            opacity: 0.4;
+            padding: 0 2px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .category {
+            background-color: #1d1f21;
+            border: 1px solid #373b41;
+        }
+
+        .category-header {
+            background-color: #373b41;
+            color: #81a2be;
+            border-bottom: 1px solid #282a2e;
+            padding: 6px;
+            font-weight: bold;
+            font-size: 11pt;
+            text-align: center;
+        }
+
+        .category-content {
+            padding: 10px;
+        }
+
+        .category-content ul {
+            list-style: none;
+            line-height: 1.7;
+        }
+
+        .category-content li {
+            padding: 2px 0;
+        }
+
+        .category-content a {
+            color: #81a2be;
+            text-decoration: underline;
+        }
+
+        .category-content a:hover {
+            color: #cc6666;
+            text-decoration: none;
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 8pt;
+            margin-top: 12px;
+            opacity: 0.6;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 4px;
+            }
+
+            .top-bar {
+                padding: 8px;
+            }
+
+            .clock {
+                font-size: 14pt;
+            }
+
+            .boards-bar {
+                padding: 6px;
+                line-height: 1.5;
+            }
+
+            .boards-bar a {
+                font-size: 10pt;
+                padding: 0 4px;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+                gap: 6px;
+            }
+
+            .category-content {
+                padding: 8px;
+            }
+
+            .category-content ul {
+                line-height: 1.6;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .clock {
+                font-size: 11pt;
+            }
+
+            .boards-bar a {
+                font-size: 9pt;
+                padding: 0 3px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="top-bar">
+            <div class="clock" id="clock"></div>
+        </div>
+
+        <div class="main-content">
+            <div class="boards-bar">
+                <a href="https://boards.4chan.org/b/">/b/</a><span>|</span>
+                <a href="https://boards.4chan.org/g/">/g/</a><span>|</span>
+                <a href="https://boards.4chan.org/pol/">/pol/</a><span>|</span>
+                <a href="https://boards.4channel.org/news/">/news/</a><span>|</span>
+                <a href="https://boards.4chan.org/x/">/x/</a><span>|</span>
+                <a href="https://boards.4channel.org/lit/">/lit/</a><span>|</span>
+                <a href="https://boards.4channel.org/his/">/his/</a><span>|</span>
+                <a href="https://boards.4channel.org/wg/">/wg/</a><span>|</span>
+                <a href="https://boards.4chan.org/s/">/s/</a><span>|</span>
+                <a href="https://boards.4chan.org/hr/">/hr/</a>
+            </div>
+
+            <div class="grid">
+                <div class="category">
+                    <div class="category-header">Media</div>
+                    <div class="category-content">
+                        <ul>
+                            <li><a href="https://www.youtube.com">YouTube</a></li>
+                            <li><a href="https://nitter.net">Nitter</a></li>
+                            <li><a href="https://reddit.com">Redlib</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="category">
+                    <div class="category-header">Reference</div>
+                    <div class="category-content">
+                        <ul>
+                            <li><a href="https://wiki.gentoo.org">Gentoo Wiki</a></li>
+                            <li><a href="https://wiki.archlinux.org">Arch Wiki</a></li>
+                            <li><a href="https://en.wikipedia.org">Wikipedia</a></li>
+                            <li><a href="https://gnu.org">Gnu Docs</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="category">
+                    <div class="category-header">News</div>
+                    <div class="category-content">
+                        <ul>
+                            <li><a href="https://news.ycombinator.com">Hacker News</a></li>
+                            <li><a href="https://lobste.rs">Lobsters</a></li>
+                            <li><a href="https://slashdot.org">Slashdot</a></li>
+                            <li><a href="https://www.reddit.com/r/programming">r/programming</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="category">
+                    <div class="category-header">Dev Tools</div>
+                    <div class="category-content">
+                        <ul>
+                            <li><a href="https://github.com">GitHub</a></li>
+                            <li><a href="https://stackoverflow.com">Stack Overflow</a></li>
+                            <li><a href="https://gitlab.com">GitLab</a></li>
+                            <li><a href="https://codeberg.org">Codeberg</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="category">
+                    <div class="category-header">Search</div>
+                    <div class="category-content">
+                        <ul>
+                            <li><a href="https://www.google.com">Google</a></li>
+                            <li><a href="https://duckduckgo.com">DuckDuckGo</a></li>
+                            <li><a href="https://www.startpage.com">Startpage</a></li>
+                            <li><a href="https://searx.be">SearX</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="category">
+                    <div class="category-header">Other</div>
+                    <div class="category-content">
+                        <ul>
+                            <li><a href="https://archive.org">Internet Archive</a></li>
+                            <li><a href="https://bandcamp.com">Bandcamp</a></li>
+                            <li><a href="https://lainchan.org">Lainchan</a></li>
+                            <li><a href="https://wiby.me">Wiby</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer">
+                Lightweight Startpage
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const el = document.getElementById('clock');
+        const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        
+        function updateClock() {
+            const n = new Date();
+            const h = ('0' + n.getHours()).slice(-2);
+            const m = ('0' + n.getMinutes()).slice(-2);
+            const s = ('0' + n.getSeconds()).slice(-2);
+            el.textContent = days[n.getDay()] + ' ' + months[n.getMonth()] + ' ' + n.getDate() + ' ' + n.getFullYear() + ' ' + h + ':' + m + ':' + s;
+        }
+
+        updateClock();
+        setInterval(updateClock, 1000);
+    </script>
+</body>
+</html>
