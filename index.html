@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Startpage</title>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Code+Latin:wght@600&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,277 +13,288 @@
         }
 
         body {
-            font-family: 'Times New Roman', Times, serif;
-            font-size: 10pt;
-            padding: 8px;
-            background-color: #1d1f21;
-            color: #c5c8c6;
+            background: #101012;
+            color: #bfc9db;
+            font-family: 'M PLUS Code Latin', monospace;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 2rem;
         }
 
-        .wrapper {
-            max-width: 1000px;
-            margin: 0 auto;
+        .container {
+            max-width: 1200px;
+            width: 100%;
         }
 
-        .top-bar {
-            background-color: #282a2e;
-            border: 1px solid #373b41;
-            padding: 10px;
-            margin-bottom: 8px;
-        }
-
-        .clock {
-            font-size: 18pt;
-            font-weight: bold;
-            color: #81a2be;
-        }
-
-        .main-content {
-            background-color: #282a2e;
-            border: 1px solid #373b41;
-            padding: 10px;
-        }
-
-        .boards-bar {
+        .header {
             text-align: center;
-            padding: 8px;
-            margin-bottom: 12px;
-            line-height: 1.8;
+            margin-bottom: 3rem;
         }
 
-        .boards-bar a {
-            color: #81a2be;
-            text-decoration: none;
-            padding: 0 6px;
-            font-weight: bold;
-            font-size: 11pt;
+        .time {
+            font-size: 4rem;
+            font-weight: 600;
+            color: #fff59d;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 20px rgba(255, 245, 157, 0.3);
         }
 
-        .boards-bar a:hover {
-            color: #cc6666;
-            text-decoration: underline;
+        .date {
+            font-size: 1.2rem;
+            color: #858893;
         }
 
-        .boards-bar span {
-            opacity: 0.4;
-            padding: 0 2px;
+        .search-bar {
+            background: #1a1a1c;
+            border: 2px solid #646a73;
+            border-radius: 8px;
+            padding: 1rem 1.5rem;
+            margin-bottom: 3rem;
+            display: flex;
+            align-items: center;
+            transition: border-color 0.3s;
         }
 
-        .grid {
+        .search-bar:focus-within {
+            border-color: #fff59d;
+        }
+
+        .search-bar::before {
+            content: '󰍉';
+            font-size: 1.5rem;
+            color: #8AB4F8;
+            margin-right: 1rem;
+        }
+
+        .search-bar input {
+            background: none;
+            border: none;
+            outline: none;
+            color: #bfc9db;
+            font-family: 'M PLUS Code Latin', monospace;
+            font-size: 1rem;
+            width: 100%;
+        }
+
+        .search-bar input::placeholder {
+            color: #646a73;
+        }
+
+        .links-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-            margin-top: 12px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
         }
 
-        .category {
-            background-color: #1d1f21;
-            border: 1px solid #373b41;
+        .link-section {
+            background: #1a1a1c;
+            border-radius: 8px;
+            padding: 1.5rem;
+            border: 1px solid #646a73;
+            transition: transform 0.2s, border-color 0.2s;
         }
 
-        .category-header {
-            background-color: #373b41;
-            color: #81a2be;
-            border-bottom: 1px solid #282a2e;
-            padding: 6px;
-            font-weight: bold;
-            font-size: 11pt;
-            text-align: center;
+        .link-section:hover {
+            transform: translateY(-2px);
+            border-color: #fff59d;
         }
 
-        .category-content {
-            padding: 10px;
+        .section-title {
+            font-size: 1.1rem;
+            color: #fff59d;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .category-content ul {
-            list-style: none;
-            line-height: 1.7;
+        .section-title::before {
+            font-size: 1.3rem;
         }
 
-        .category-content li {
-            padding: 2px 0;
+        .link-section.chan .section-title::before { content: '󰊌'; color: #a5d6a7; }
+        .link-section.video .section-title::before { content: '󰗃'; color: #cf6679; }
+        .link-section.social .section-title::before { content: '󰙯'; color: #8AB4F8; }
+        .link-section.tools .section-title::before { content: '󰒓'; color: #bb86fc; }
+        .link-section.dev .section-title::before { content: '󰨞'; color: #03dac6; }
+        .link-section.misc .section-title::before { content: '󰈙'; color: #ffab91; }
+
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
         }
 
-        .category-content a {
-            color: #81a2be;
-            text-decoration: underline;
-        }
-
-        .category-content a:hover {
-            color: #cc6666;
+        .link {
+            color: #bfc9db;
             text-decoration: none;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .link:hover {
+            background: #646a73;
+            color: #fff59d;
+            padding-left: 1rem;
+        }
+
+        .link::before {
+            content: '›';
+            color: #858893;
+            font-size: 1.2rem;
         }
 
         .footer {
             text-align: center;
-            font-size: 8pt;
-            margin-top: 12px;
-            opacity: 0.6;
+            color: #646a73;
+            font-size: 0.9rem;
+            margin-top: 2rem;
         }
 
         @media (max-width: 768px) {
-            body {
-                padding: 4px;
+            .time {
+                font-size: 2.5rem;
             }
-
-            .top-bar {
-                padding: 8px;
-            }
-
-            .clock {
-                font-size: 14pt;
-            }
-
-            .boards-bar {
-                padding: 6px;
-                line-height: 1.5;
-            }
-
-            .boards-bar a {
-                font-size: 10pt;
-                padding: 0 4px;
-            }
-
-            .grid {
+            
+            .links-grid {
                 grid-template-columns: 1fr;
-                gap: 6px;
-            }
-
-            .category-content {
-                padding: 8px;
-            }
-
-            .category-content ul {
-                line-height: 1.6;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .clock {
-                font-size: 11pt;
-            }
-
-            .boards-bar a {
-                font-size: 9pt;
-                padding: 0 3px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="wrapper">
-        <div class="top-bar">
-            <div class="clock" id="clock"></div>
+    <div class="container">
+        <div class="header">
+            <div class="time" id="time">00:00:00</div>
+            <div class="date" id="date">Loading...</div>
         </div>
 
-        <div class="main-content">
-            <div class="boards-bar">
-                <a href="https://boards.4chan.org/b/">/b/</a><span>|</span>
-                <a href="https://boards.4chan.org/g/">/g/</a><span>|</span>
-                <a href="https://boards.4chan.org/pol/">/pol/</a><span>|</span>
-                <a href="https://boards.4channel.org/news/">/news/</a><span>|</span>
-                <a href="https://boards.4chan.org/x/">/x/</a><span>|</span>
-                <a href="https://boards.4channel.org/lit/">/lit/</a><span>|</span>
-                <a href="https://boards.4channel.org/his/">/his/</a><span>|</span>
-                <a href="https://boards.4channel.org/wg/">/wg/</a><span>|</span>
-                <a href="https://boards.4chan.org/s/">/s/</a><span>|</span>
-                <a href="https://boards.4chan.org/hr/">/hr/</a>
-            </div>
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="search the web..." />
+        </div>
 
-            <div class="grid">
-                <div class="category">
-                    <div class="category-header">Media</div>
-                    <div class="category-content">
-                        <ul>
-                            <li><a href="https://www.youtube.com">YouTube</a></li>
-                            <li><a href="https://nitter.net">Nitter</a></li>
-                            <li><a href="https://reddit.com">Redlib</a></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="category">
-                    <div class="category-header">Reference</div>
-                    <div class="category-content">
-                        <ul>
-                            <li><a href="https://wiki.gentoo.org">Gentoo Wiki</a></li>
-                            <li><a href="https://wiki.archlinux.org">Arch Wiki</a></li>
-                            <li><a href="https://en.wikipedia.org">Wikipedia</a></li>
-                            <li><a href="https://gnu.org">Gnu Docs</a></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="category">
-                    <div class="category-header">News</div>
-                    <div class="category-content">
-                        <ul>
-                            <li><a href="https://news.ycombinator.com">Hacker News</a></li>
-                            <li><a href="https://lobste.rs">Lobsters</a></li>
-                            <li><a href="https://slashdot.org">Slashdot</a></li>
-                            <li><a href="https://www.reddit.com/r/programming">r/programming</a></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="category">
-                    <div class="category-header">Dev Tools</div>
-                    <div class="category-content">
-                        <ul>
-                            <li><a href="https://github.com">GitHub</a></li>
-                            <li><a href="https://stackoverflow.com">Stack Overflow</a></li>
-                            <li><a href="https://gitlab.com">GitLab</a></li>
-                            <li><a href="https://codeberg.org">Codeberg</a></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="category">
-                    <div class="category-header">Search</div>
-                    <div class="category-content">
-                        <ul>
-                            <li><a href="https://www.google.com">Google</a></li>
-                            <li><a href="https://duckduckgo.com">DuckDuckGo</a></li>
-                            <li><a href="https://www.startpage.com">Startpage</a></li>
-                            <li><a href="https://searx.be">SearX</a></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="category">
-                    <div class="category-header">Other</div>
-                    <div class="category-content">
-                        <ul>
-                            <li><a href="https://archive.org">Internet Archive</a></li>
-                            <li><a href="https://bandcamp.com">Bandcamp</a></li>
-                            <li><a href="https://lainchan.org">Lainchan</a></li>
-                            <li><a href="https://wiby.me">Wiby</a></li>
-                        </ul>
-                    </div>
+        <div class="links-grid">
+            <div class="link-section chan">
+                <div class="section-title">4chan Boards</div>
+                <div class="links">
+                    <a href="https://boards.4chan.org/g/" class="link">Technology</a>
+                    <a href="https://boards.4chan.org/v/" class="link">Video Games</a>
+                    <a href="https://boards.4chan.org/a/" class="link">Anime & Manga</a>
+                    <a href="https://boards.4chan.org/wg/" class="link">Wallpapers</a>
+                    <a href="https://boards.4chan.org/mu/" class="link">Music</a>
+                    <a href="https://boards.4chan.org/fit/" class="link">Fitness</a>
+                    <a href="https://boards.4chan.org/pol/" class="link">Politics</a>
                 </div>
             </div>
 
-            <div class="footer">
-                Lightweight Startpage
+            <div class="link-section video">
+                <div class="section-title">Video</div>
+                <div class="links">
+                    <a href="https://youtube.com" class="link">YouTube</a>
+                    <a href="https://youtube.com/feed/subscriptions" class="link">YT Subscriptions</a>
+                    <a href="https://twitch.tv" class="link">Twitch</a>
+                    <a href="https://vimeo.com" class="link">Vimeo</a>
+                    <a href="https://odysee.com" class="link">Odysee</a>
+                </div>
             </div>
+
+            <div class="link-section social">
+                <div class="section-title">Social</div>
+                <div class="links">
+                    <a href="https://reddit.com" class="link">Reddit</a>
+                    <a href="https://x.com" class="link">X (Twitter)</a>
+                    <a href="https://discord.com/app" class="link">Discord</a>
+                    <a href="https://telegram.org" class="link">Telegram</a>
+                    <a href="https://news.ycombinator.com" class="link">Hacker News</a>
+                </div>
+            </div>
+
+            <div class="link-section tools">
+                <div class="section-title">Tools</div>
+                <div class="links">
+                    <a href="https://gmail.com" class="link">Gmail</a>
+                    <a href="https://protonmail.com" class="link">ProtonMail</a>
+                    <a href="https://drive.google.com" class="link">Drive</a>
+                    <a href="https://translate.google.com" class="link">Translate</a>
+                    <a href="https://deepl.com" class="link">DeepL</a>
+                </div>
+            </div>
+
+            <div class="link-section dev">
+                <div class="section-title">Development</div>
+                <div class="links">
+                    <a href="https://github.com" class="link">GitHub</a>
+                    <a href="https://gitlab.com" class="link">GitLab</a>
+                    <a href="https://stackoverflow.com" class="link">Stack Overflow</a>
+                    <a href="https://archlinux.org" class="link">Arch Wiki</a>
+                    <a href="https://developer.mozilla.org" class="link">MDN Web Docs</a>
+                </div>
+            </div>
+
+            <div class="link-section misc">
+                <div class="section-title">Misc</div>
+                <div class="links">
+                    <a href="https://monkeytype.com" class="link">Monkeytype</a>
+                    <a href="https://archive.org" class="link">Internet Archive</a>
+                    <a href="https://libgen.is" class="link">Library Genesis</a>
+                    <a href="https://wallhaven.cc" class="link">Wallhaven</a>
+                    <a href="https://saucenao.com" class="link">SauceNAO</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            Press Ctrl+K to focus search
         </div>
     </div>
 
     <script>
-        const el = document.getElementById('clock');
-        const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-        
-        function updateClock() {
-            const n = new Date();
-            const h = ('0' + n.getHours()).slice(-2);
-            const m = ('0' + n.getMinutes()).slice(-2);
-            const s = ('0' + n.getSeconds()).slice(-2);
-            el.textContent = days[n.getDay()] + ' ' + months[n.getMonth()] + ' ' + n.getDate() + ' ' + n.getFullYear() + ' ' + h + ':' + m + ':' + s;
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('en-US', { 
+                hour12: false,
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            });
+            const dateString = now.toLocaleDateString('en-US', { 
+                weekday: 'long',
+                month: 'long',
+                day: 'numeric'
+            });
+            
+            document.getElementById('time').textContent = timeString;
+            document.getElementById('date').textContent = dateString;
         }
 
-        updateClock();
-        setInterval(updateClock, 1000);
+        updateTime();
+        setInterval(updateTime, 1000);
+
+        const searchInput = document.getElementById('searchInput');
+        
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const query = searchInput.value.trim();
+                if (query) {
+                    window.location.href = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+                }
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                e.preventDefault();
+                searchInput.focus();
+            }
+        });
     </script>
 </body>
 </html>
