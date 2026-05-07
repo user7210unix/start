@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>start</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="links.js"></script>
+</head>
+<body>
+  <div class="page">
+
+    <div class="left">
+      <!-- search -->
+      <div class="search-wrap">
+        <span>›</span>
+        <input
+          id="search"
+          type="text"
+          placeholder="search..."
+          autocomplete="off"
+          autofocus
+        />
+      </div>
+
+      <!-- link tree (built from links.js) -->
+      <nav class="tree" id="tree"></nav>
+    </div>
+
+    <div class="right">
+      <img src="assets/images/yot.jpg" alt="" />
+    </div>
+
+  </div>
+
+  <script>
+    // ── build tree from links.js ──
+    const tree = document.getElementById('tree');
+
+    const root = document.createElement('div');
+    root.className = 'tree-root';
+    root.textContent = '~/';
+    tree.appendChild(root);
+
+    LINKS.forEach((group, gi) => {
+      const isLastGroup = gi === LINKS.length - 1;
+
+      const cat = document.createElement('div');
+      cat.className = 'tree-category' + (isLastGroup ? ' last' : '');
+
+      const label = document.createElement('div');
+      label.className = 'tree-category-label';
+      label.appendChild(document.createTextNode(group.category));
+      cat.appendChild(label);
+
+      const items = document.createElement('div');
+      items.className = 'tree-items';
+
+      group.items.forEach(link => {
+        const item = document.createElement('div');
+        item.className = 'tree-item';
+        const a = document.createElement('a');
+        a.href = link.url;
+        a.textContent = link.name;
+        a.target = '_top';
+        item.appendChild(a);
+        items.appendChild(item);
+      });
+
+      cat.appendChild(items);
+      tree.appendChild(cat);
+    });
+
+    // ── search: Enter to go to DuckDuckGo ──
+    document.getElementById('search').addEventListener('keydown', e => {
+      if (e.key === 'Enter' && e.target.value.trim()) {
+        window.open('https://duckduckgo.com/?q=' + encodeURIComponent(e.target.value.trim()), '_top');
+      }
+    });
+  </script>
+</body>
+</html>
