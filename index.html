@@ -1,0 +1,118 @@
+<!DOCTYPE HTML>
+
+<html>
+	
+  <head>
+	
+		
+    <link rel="stylesheet" type="text/css" href="style.css">
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>homepage</title>
+		
+  </head>
+
+  <body>
+
+<!-- This piece of Javascript will randomly decide a mascot for your homepage. -->
+<script>
+var pictures = ['images/mascot1.png', 'images/mascot2.png', 'images/mascot3.png', 'images/mascot4.png', 'images/mascot5.png', 'images/mascot6.png', 'images/mascot7.png', 'images/mascot8.png', 'images/mascot9.png', 'images/mascot10.png', 'images/mascot11.png', 'images/mascot12.png', 'images/mascot13.png',　'images/mascot14.png', 'images/mascot15.png', 'images/mascot18.png', 'images/mascot19.png',];
+var picture = pictures[Math.floor(Math.random() * pictures.length)];
+document.write('<img src="' + picture + '"/>');
+</script>
+
+<script>
+var pictures = ['images/mascot1.png', 'images/mascot2.png', 'images/mascot3.png', 'images/mascot4.png', 'images/mascot5.png', 'images/mascot6.png', 'images/mascot7.png', 'images/mascot8.png', 'images/mascot9.png', 'images/mascot10.png', 'images/mascot11.png', 'images/mascot12.png', 'images/mascot13.png',　'images/mascot14.png', 'images/mascot15.png', 'images/mascot18.png', 'images/mascot19.png',];
+var picture = pictures[Math.floor(Math.random() * pictures.length)];
+document.write('<img class="img2" src="' + picture + '"/>');
+</script>
+
+<div id="main1" class="main" style="display: block;">
+<!-- This piece of Javascript generates a greeting based on the time of day. -->
+<script id="greeting">
+<!--
+{
+var greet;
+  if (new Date().getHours() < 12) {
+      greet = "おはようございます";
+             }
+
+             else if (new Date().getHours() < 16) {
+                     greet = "こんにちわ";
+                      }
+                      else　if (new Date().getHours() < 18) {
+                               greet = "こんばんは";
+                                }
+                                else  {
+                                       greet = "おやすみなさい";
+                                       }
+document.write('<p>' + greet + '</p>');
+}
+//-->
+</script>
+
+<!-- These are the main drop down menu items. Replace the placeholders with what you need. -->
+		<div id="navparent"> 
+			<nav>
+				 <ul>
+					 <li>
+						 <div>
+							 <a href="http://endchan.org/">boards</a>
+						 </div>
+				 			<ul> 
+				 			<!-- This is the part that makes it a drop down. Add this code between the <li> </li> tags of what you want to be dropped down -->
+				   			      <li><a href="https://boards.4chan.org/g/">/g/</a></li>
+           						<li><a href="https://boards.4chan.org/pol/">/pol/</a></li>
+					 		        <li><a href="https://endchan.org/b/">/b/</a></li>
+         			</ul>
+			   	</li>
+					<li>
+						<div>
+							<a href="http://www.youtube.com/">youtube</a>
+						</div>
+         			<ul>
+        						<li><a href="https://animeheaven.me">anime</a></li>
+        						<li><a href="https://netflix.com">netflix</a></li>
+        			</ul>						
+        	</li>
+					<li>
+						<div>
+							<a href="https://claude.ai">claude</a>
+				 		</div>
+							<ul>
+        						<li><a href="http://chat.com">chat</a></li>
+        			</ul>
+   					</li>
+					<li>
+				 		<div>
+							<a href="https://github.com">github</a>
+						</div>
+							<ul>
+					          <li><a href="https://wallhaven.cc">wallhaven</a></li>
+							</ul>
+					</li>	
+				</ul>
+			</nav>
+<hr>
+
+<!-- This is your secondary menu. Replace the placeholders with what you need. These can also be drop downs because of my bad coding. -->
+<nav class="nav2">
+	<ul class="ul2">
+	  <li><a href="https://8ch.net">8ch</a></li>
+		<li><a href="https://ebay.com">ebay</a></li>
+		<li><a href="https://amazon.com">amazon</a></li>
+		<li><a href="https://gmail.com">mail</a></li>
+	</ul>
+</nav>
+</div>
+
+</div>			
+		
+
+<!-- This is the searchbox. Just remove the comment indicators to activate. -->
+		
+<!--<form id="searchfield" method="get" action="http://www.google.com/search"> --> 
+<!--<input type="text" name="q" size="108" maxlength="255" value="" class="textinput" autofocus="true" autocomplete="off" placeholder="the fuck you looking for?" STYLE= "background-color: #eaeaea; font-family: '04B03' " /> <input type="submit" value=">" class="submitinput"/> -->	
+
+</body>
+</html>
