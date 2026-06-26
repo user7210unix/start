@@ -173,7 +173,7 @@ hr {
 
 @font-face {
   font-family: MapleMono; 
-  src: url('../assets/fonts/MapleMono-SemiBold.ttf');
+  src: url('../assets/fonts/MapleMono-SemiBold.woff2');
   font-weight: 600; 
   font-style: normal;
 }
