@@ -1,119 +1,115 @@
 <!DOCTYPE HTML>
-
 <html>
-	
+
   <head>
-	
-		
+
     <link rel="stylesheet" type="text/css" href="style.css">
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>homepage</title>
-		
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>homepage</title>
+
   </head>
 
   <body>
 
-<!-- This piece of Javascript will randomly decide a mascot for your homepage. -->
-<script>
-var pictures = ['images/mascot1.png', 'images/mascot2.png', 'images/mascot3.png', 'images/mascot4.png', 'images/mascot5.png', 'images/mascot6.png', 'images/mascot7.png', 'images/mascot8.png', 'images/mascot9.png', 'images/mascot10.png', 'images/mascot11.png', 'images/mascot12.png', 'images/mascot13.png',　'images/mascot14.png', 'images/mascot15.png', 'images/mascot18.png', 'images/mascot19.png',];
-var picture = pictures[Math.floor(Math.random() * pictures.length)];
-document.write('<img src="' + picture + '"/>');
-</script>
+    <!-- ticker, dimmed for night use -->
+    <script>
+      document.getElementById('hitcounter').textContent = String(Math.floor(Math.random() * 90000) + 10000).padStart(6, '0');
+    </script>
 
-<script>
-var pictures = ['images/mascot1.png', 'images/mascot2.png', 'images/mascot3.png', 'images/mascot4.png', 'images/mascot5.png', 'images/mascot6.png', 'images/mascot7.png', 'images/mascot8.png', 'images/mascot9.png', 'images/mascot10.png', 'images/mascot11.png', 'images/mascot12.png', 'images/mascot13.png',　'images/mascot14.png', 'images/mascot15.png', 'images/mascot18.png', 'images/mascot19.png',];
-var picture = pictures[Math.floor(Math.random() * pictures.length)];
-document.write('<img class="img2" src="' + picture + '"/>');
-</script>
+    <!-- one mascot, fixed to the right side of the page, one per page load -->
+    <script>
+      var pictures = ['https://raw.githubusercontent.com/startpages/startpages.github.io/master/startpages/Katawa-Dojo-Startpage/images/mascot1.png', 'https://raw.githubusercontent.com/startpages/startpages.github.io/master/startpages/Katawa-Dojo-Startpage/images/mascot2.png', 'https://raw.githubusercontent.com/startpages/startpages.github.io/master/startpages/Katawa-Dojo-Startpage/images/mascot3.png', 'https://raw.githubusercontent.com/startpages/startpages.github.io/master/startpages/Katawa-Dojo-Startpage/images/mascot4.png', 'https://raw.githubusercontent.com/startpages/startpages.github.io/master/startpages/Katawa-Dojo-Startpage/images/mascot5.png', 'https://raw.githubusercontent.com/startpages/startpages.github.io/master/startpages/Katawa-Dojo-Startpage/images/mascot6.png', 'https://raw.githubusercontent.com/startpages/startpages.github.io/master/startpages/Katawa-Dojo-Startpage/images/mascot7.png', 'https://raw.githubusercontent.com/startpages/startpages.github.io/master/startpages/Katawa-Dojo-Startpage/images/mascot8.png', 'https://raw.githubusercontent.com/startpages/startpages.github.io/master/startpages/Katawa-Dojo-Startpage/images/mascot9.png', 'https://raw.githubusercontent.com/startpages/startpages.github.io/master/startpages/Katawa-Dojo-Startpage/images/mascot10.png', 'https://raw.githubusercontent.com/startpages/startpages.github.io/master/startpages/Katawa-Dojo-Startpage/images/mascot11.png', 'https://raw.githubusercontent.com/startpages/startpages.github.io/master/startpages/Katawa-Dojo-Startpage/images/mascot12.png', 'https://raw.githubusercontent.com/startpages/startpages.github.io/master/startpages/Katawa-Dojo-Startpage/images/mascot13.png', 'https://raw.githubusercontent.com/startpages/startpages.github.io/master/startpages/Katawa-Dojo-Startpage/images/mascot14.png', 'https://raw.githubusercontent.com/startpages/startpages.github.io/master/startpages/Katawa-Dojo-Startpage/images/mascot15.png', 'https://raw.githubusercontent.com/startpages/startpages.github.io/master/startpages/Katawa-Dojo-Startpage/images/mascot16.png', 'https://raw.githubusercontent.com/startpages/startpages.github.io/master/startpages/Katawa-Dojo-Startpage/images/mascot18.png', 'https://raw.githubusercontent.com/startpages/startpages.github.io/master/startpages/Katawa-Dojo-Startpage/images/mascot19.png'];
+      var picture = pictures[Math.floor(Math.random() * pictures.length)];
+      document.write('<img id="mascot" src="' + picture + '"/>');
+    </script>
 
-<div id="main1" class="main" style="display: block;">
-<!-- This piece of Javascript generates a greeting based on the time of day. -->
-<script id="greeting">
-<!--
-{
-var greet;
-  if (new Date().getHours() < 12) {
-      greet = "おはようございます";
-             }
+    <div id="main1" class="main">
 
-             else if (new Date().getHours() < 16) {
-                     greet = "こんにちわ";
-                      }
-                      else　if (new Date().getHours() < 18) {
-                               greet = "こんばんは";
-                                }
-                                else  {
-                                       greet = "おやすみなさい";
-                                       }
-document.write('<p>' + greet + '</p>');
-}
-//-->
-</script>
+      <!-- greeting, based on time of day -->
+      <script>
+        {
+          var greet;
+          if (new Date().getHours() < 12) {
+            greet = "おはようございます";
+          }
+          else if (new Date().getHours() < 16) {
+            greet = "こんにちわ";
+          }
+          else if (new Date().getHours() < 18) {
+            greet = "こんばんは";
+          }
+          else {
+            greet = "おやすみなさい";
+          }
+          document.write('<p class="greeting">' + greet + '</p>');
+        }
+      </script>
 
-<!-- These are the main drop down menu items. Replace the placeholders with what you need. -->
-		<div id="navparent"> 
-			<nav>
-				 <ul>
-					 <li>
-						 <div>
-							 <a href="http://endchan.org/">boards</a>
-						 </div>
-				 			<ul> 
-				 			<!-- This is the part that makes it a drop down. Add this code between the <li> </li> tags of what you want to be dropped down -->
-				   			    <li><a href="https://boards.4chan.org/g/">/g/</a></li>
-           						<li><a href="https://boards.4chan.org/v/">/v/</a></li>
-								<li><a href="https://boards.4chan.org/pol/">/pol/</a></li>
-					 		    <li><a href="https://zzzchan.xyz/b/">/b/</a></li>
-         			</ul>
-			   	</li>
-					<li>
-						<div>
-							<a href="http://www.youtube.com/">youtube</a>
-						</div>
-         			<ul>
-        						<li><a href="https://animeheaven.me">anime</a></li>
-        						<li><a href="https://netflix.com">netflix</a></li>
-        			</ul>						
-        	</li>
-					<li>
-						<div>
-							<a href="https://claude.ai">claude</a>
-				 		</div>
-							<ul>
-        						<li><a href="http://chat.com">chat</a></li>
-        			</ul>
-   					</li>
-					<li>
-				 		<div>
-							<a href="https://github.com">github</a>
-						</div>
-							<ul>
-					          <li><a href="https://wallhaven.cc">wallhaven</a></li>
-							</ul>
-					</li>	
-				</ul>
-			</nav>
-<hr>
+      <!-- primary links: one row per site, bullet sits outside the box, matches the sketch -->
+      <ul class="linklist">
+        <li>
+          <a href="http://www.4chan.org/">4chan</a>
+          <ul class="sublist">
+            <li><a href="https://boards.4chan.org/vg/">/vg/ - video game generals</a></li>
+            <li><a href="https://boards.4chan.org/wg/">/wg/ - wallpapers</a></li>
+            <li><a href="https://boards.4chan.org/b/">/b/ - random</a></li>
+            <li><a href="https://boards.4chan.org/r9k/">/r9k/ - robot9001</a></li>
+            <li><a href="https://boards.4chan.org/jp/">/jp/ - otaku culture</a></li>
+            <li><a href="https://boards.4chan.org/a/">/a/ - anime &amp; manga</a></li>
+            <li><a href="https://boards.4chan.org/pol/">/pol/ - pol</a></li>
+            <li><a href="https://boards.4chan.org/diy/">/diy/ - do it yourself</a></li>
+            <li><a href="https://boards.4chan.org/ck/">/ck/ - food &amp; cooking</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="http://www.youtube.com/">youtube</a>
+        </li>
+        <li>
+          <a href="https://retrosystemsrevival.blogspot.com/">archives</a>
+          <ul class="sublist">
+            <li><a href="http://github.com/"></a>github</li>
+          </ul>
+        </li>
+        <li>
+          <a href="http://www.soundcloud.com/">soundcloud</a>
+        </li>
+        <li>
+          <a href="https://nyaa.si/">nyaa</a>
+          <ul class="sublist">
+            <li><a href="https://nyaa.si/?f=0&c=1_2&q=&s=seeders&o=desc">most seeded</a></li>
+            <li><a href="https://nyaa.si/?f=0&c=0_0">all categories</a></li>
+          </ul>
+        </li>
+      </ul>
 
-<!-- This is your secondary menu. Replace the placeholders with what you need. These can also be drop downs because of my bad coding. -->
-<nav class="nav2">
-	<ul class="ul2">
-	  <li><a href="https://zzzchan.xyz">zzz</a></li>
-		<li><a href="https://ebay.com">ebay</a></li>
-		<li><a href="https://amazon.com">amazon</a></li>
-		<li><a href="https://gmail.com">mail</a></li>
-	</ul>
-</nav>
-</div>
+      <!-- secondary: actual working-man errand links -->
+      <ul class="linklist linklist-small">
+        <li><a href="http://www.ebay.com/">ebay</a></li>
+        <li><a href="https://www.craigslist.org/">craigslist</a></li>
+        <li><a href="https://catbox.moe/">catbox</a></li>
+        <li><a href="https://www.mapquest.com/">mapquest</a></li>
+        <li><a href="https://www.usps.com/">usps tracking</a></li>
+        <li><a href="https://www.weather.gov/">weather</a></li>
+        <li><a href="https://web.archive.org/">wayback machine</a></li>
+      </ul>
 
-</div>			
-		
+      <!-- tertiary: original hobby links -->
+      <ul class="linklist linklist-tiny">
+        <li><a href="http://www.1999.co.jp/eng/">hobbysearch</a></li>
+        <li><a href="http://www.discogs.com/my">discogs</a></li>
+        <li><a href="http://www.realkana.com/">realkana</a></li>
+        <li><a href="http://nagomi.ne.jp/">nagomi</a></li>
+      </ul>
 
-<!-- This is the searchbox. Just remove the comment indicators to activate. -->
-		
-<!--<form id="searchfield" method="get" action="http://www.google.com/search"> --> 
-<!--<input type="text" name="q" size="108" maxlength="255" value="" class="textinput" autofocus="true" autocomplete="off" placeholder="the fuck you looking for?" STYLE= "background-color: #eaeaea; font-family: '04B03' " /> <input type="submit" value=">" class="submitinput"/> -->	
+    </div>
 
-</body>
+    <!-- searchbox -->
+    <form id="searchfield" method="get" action="http://www.google.com/search"> -->
+    <input type="text" name="q" size="108" maxlength="255" value="" class="textinput" autofocus="true" autocomplete="off" placeholder="what the fuck are you looking for?" /> 
+    <input type="submit" value=">" class="submitinput"/>
+
+   
+
+  </body>
 </html>
