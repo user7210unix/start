@@ -1,214 +1,192 @@
 body {
-  font-family: 'Yomogi';
-  background-image: url("https://raw.githubusercontent.com/orangci/walls-catppuccin-mocha/master/foggy-city.jpg");
-  font-size: 2em;
-  cursor: default;
-  overflow: hidden;
+    margin: 0;
+    padding: 0;
+    background: #18130f;
+    color: #c7ba95;
+    font: 12px "Tahoma", "MS Sans Serif", sans-serif;
 }
 
-img {
-  z-index: -2;
-  position: fixed; 
-  max-height: 75%;
-  bottom: 0%; 
-  left: 5%;
-}
-
-.img2 {
-  z-index: -2;
-  position: fixed;
-  max-height: 75%;
-  bottom: 0%;
-  left: 80%;
-}
-
-#navparent {
-  position: fixed; 
-  font-size: 82%;
-  top: 55%;
-  margin-top: -10.5%;
-  left: 0;
-  right: 0;
-  width: 50%;
-}
-
-nav {
-  position: fixed;
-  text-align: center;
-  font-size: 4vh;
-  cursor: default; 
-  top: 33.6%;
-  width: 50%;
-  left: 24%;
-  margin-left: auto;
-  margin-right: auto; 
-  z-index: 2;
+html {
+    overflow-y: scroll;
 }
 
 a {
-  text-decoration: none;
-  font-size: 4vh;
-  cursor: default;
-  color: #576890; 
-  transition: color 0.2s;
+    color: #d8c77b;
+    text-decoration: none;
 }
 
-a:hover{
-  color: #4F7DF9;
+a:visited {
+    color: #bca36a;
 }
 
-li > ul {
-  visibility: hidden;
-  opacity: 0;
-  transition: all 0.5s;
-  overflow-y: hidden;
-  max-height: 0;
-  padding: 0 5px;
+a:hover {
+    color: #fff1a8;
+    text-decoration: underline;
 }
 
-li:hover > ul {
-  visibility: visible;
-  opacity: 1;
-  transition: all 0.5s;
-  max-height: 200px;
-  max-width: auto;
-  overflow-y: hidden;
-}
-
-nav > ul > li {
-  background: #292929;
-  padding: 1px 10px;
-  border: 1px solid #57689033; 
-  display: inline-table; 
-  border-radius: 5px;
-}
-
-nav ul ul li {
-  display: block; 
-  padding: 5px 0px;
-}
-
-p {
-  position: fixed;
-  font-size: 6vh;
-  color: #576890; 
-  top: 20%;      
-  width: 100%; 
-  left: 0%;
-  right: 0%; 
-  text-align: center; 
-  font-family: 'Yomogi';
-  cursor: default;
-}
-
-hr {
-  position: fixed;
-  margin-bottom: -10px;
-  width: 30%;
-  top: 38vh;
-  left: 33%;
-  z-index: -2;
-  color: #cecde200;
-  height: 1px;
-  border-top: 1px solid #cecde200;
-}
-
-.nav2 {
-  text-align: center;
-  position: fixed; 
-  width: 50%;    /* 60% */
-  top: 43%;
-  margin-left: 0%;
-  margin-right: 0%;
-  font-size: 5vh;
-  cursor: default;
-  z-index: 1;
-}
-
-.nav2 > .ul2 > li,a {
-  border: none; 
-  background: none;
-  font-family: 'MapleMono', monospace;
-}
-
-.ul2 > li a {
-  font-size: 50%;
-  font-family: 'MapleMono', monospace;
-}
-
-#searchfield .textinput {
-
-  position: absolute; top:1%; left: 20%; border:1px solid #cecde2; 
-  border-top-left-radius: 5px 5px; 
-  border-bottom-left-radius: 5px 5px;
-}
-
-#searchfield .submitinput {
-
-  position: fixed;
-  top:.955%; 
-  left:77%; 
-  border:1px solid #cecde2; 
-    border-top-right-radius: 5px 5px;
-    border-bottom-right-radius: 5px 5px; 
-  color: #cecde2; 
-  transition: all 0.2s;
-}
-
-#searchfield .submitinput:active {
-  color: #551a8b;
-  background-color: #eaeaea;
-}
-
-.submitinput::-moz-focus-inner { 
-  border: 0;
-}
-
-@font-face {
-  font-family: Yomogi;
-  src: url('../assets/fonts/Yomogi-Regular.ttf'); 
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: MapleMono; 
-  src: url('../assets/fonts/MapleMono-SemiBold.woff2');
-  font-weight: 600; 
-  font-style: normal;
-}
-
-@media screen and (max-width: 920px) {
-  /* You can edit this portion to make it phone/tablet compatible */
+#mascot {
+    position: fixed;
+    right: 24px;
+    top: 80px;
+    max-width: 240px;
+    max-height: 78%;
+    border: 1px solid #54432d;
+    background: #221b15;
+    padding: 3px;
 }
 
 .main {
-  border-style: solid;
-    border-top-style: solid;
-    border-right-style: solid;
-    border-bottom-style: solid;
-    border-left-style: solid;
-  border-width: 1px;
-    border-top-width: 1px;
-    border-right-width: 1px;
-    border-bottom-width: 1px;
-    border-left-width: 1px;
-  border-color: #000000;
-    border-top-color: rgb(0, 0, 0);
-    border-right-color: rgb(0, 0, 0);
-    border-bottom-color: rgb(0, 0, 0);
-    border-left-color: rgb(0, 0, 0);
-  position: fixed;
-  top: 10%;
-  width: 50%;
-  height: 50%;
-  left: 0%;
-  right: 0%;
-  margin: auto;
-    margin-top: auto;
-    margin-right: auto;
-    margin-bottom: auto;
-    margin-left: auto;
-  background-color: #1e1e1e;
-  text-align: center;
+    width: 360px;
+    margin: 45px 0 40px 110px;
+}
+
+.greeting {
+    text-align: center;
+    font-size: 20px;
+    margin: 0 0 18px 0;
+    color: #d3aa67;
+    letter-spacing: 1px;
+}
+
+.linklist {
+    list-style: none;
+    margin: 0 0 18px 18px;
+    padding: 0;
+    background: #221b15;
+    border: 1px solid #54432d;
+}
+
+.linklist li {
+    position: relative;
+    padding: 7px 12px;
+    text-align: center;
+    border-bottom: 1px dotted #4a3927;
+}
+
+.linklist li:last-child {
+    border-bottom: none;
+}
+
+.linklist li::before {
+    content: "•";
+    position: absolute;
+    left: -15px;
+    top: 7px;
+    color: #9e7651;
+}
+
+.linklist li:hover {
+    background: #2b231b;
+}
+
+.linklist > li > a {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.linklist-small li a {
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.linklist-tiny {
+    margin-left: 30px;
+}
+
+.linklist-tiny li {
+    padding: 5px 10px;
+}
+
+.linklist-tiny li::before {
+    left: -12px;
+    top: 5px;
+    color: #6d6652;
+    font-size: 10px;
+}
+
+.linklist-tiny a {
+    font-size: 11px;
+    color: #9e9476;
+}
+
+.sublist {
+    display: none;
+    list-style: none;
+    margin: 8px -12px -7px;
+    padding: 0;
+    border-top: 1px solid #4a3927;
+    background: #1b1511;
+}
+
+.linklist li:hover .sublist {
+    display: block;
+}
+
+.sublist li {
+    padding: 5px 12px;
+    text-align: left;
+    border-bottom: 1px dotted #35291d;
+}
+
+.sublist li:last-child {
+    border-bottom: none;
+}
+
+.sublist a {
+    font-size: 11px;
+    color: #b2a47b;
+}
+
+.sublist a:hover {
+    color: #fff1a8;
+}
+
+#searchfield {
+    width: 360px;
+    margin: 12px 0 0 110px;
+}
+
+.textinput {
+    width: 320px;
+    padding: 3px;
+    background: #1a1511;
+    border: 1px solid #54432d;
+    color: #c7ba95;
+    font: 12px "Courier New", monospace;
+}
+
+.submitinput {
+    width: 28px;
+    padding: 3px;
+    background: #2a2119;
+    border: 1px solid #54432d;
+    color: #d8c77b;
+    font: bold 12px Tahoma, sans-serif;
+}
+
+.submitinput:hover {
+    background: #3a2c20;
+    cursor: pointer;
+}
+
+#badges {
+    width: 360px;
+    margin: 25px 0 20px 110px;
+    padding-top: 8px;
+    text-align: center;
+    border-top: 1px dotted #54432d;
+}
+
+.badge {
+    display: inline-block;
+    margin: 2px;
+    padding: 2px 5px;
+    background: #211913;
+    border: 1px solid #54432d;
+    color: #a29472;
+    font: 10px "Courier New", monospace;
+}
+
+.blink {
+    color: #ff8d6d;
 }
