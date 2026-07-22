@@ -1,0 +1,192 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: #18130f;
+    color: #c7ba95;
+    font: 12px "Tahoma", "MS Sans Serif", sans-serif;
+}
+
+html {
+    overflow-y: scroll;
+}
+
+a {
+    color: #d8c77b;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #bca36a;
+}
+
+a:hover {
+    color: #fff1a8;
+    text-decoration: underline;
+}
+
+#mascot {
+    position: fixed;
+    right: 24px;
+    top: 80px;
+    max-width: 240px;
+    max-height: 78%;
+    border: 1px solid #54432d;
+    background: #221b15;
+    padding: 3px;
+}
+
+.main {
+    width: 360px;
+    margin: 45px 0 40px 110px;
+}
+
+.greeting {
+    text-align: center;
+    font-size: 20px;
+    margin: 0 0 18px 0;
+    color: #d3aa67;
+    letter-spacing: 1px;
+}
+
+.linklist {
+    list-style: none;
+    margin: 0 0 18px 18px;
+    padding: 0;
+    background: #221b15;
+    border: 1px solid #54432d;
+}
+
+.linklist li {
+    position: relative;
+    padding: 7px 12px;
+    text-align: center;
+    border-bottom: 1px dotted #4a3927;
+}
+
+.linklist li:last-child {
+    border-bottom: none;
+}
+
+.linklist li::before {
+    content: "•";
+    position: absolute;
+    left: -15px;
+    top: 7px;
+    color: #9e7651;
+}
+
+.linklist li:hover {
+    background: #2b231b;
+}
+
+.linklist > li > a {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.linklist-small li a {
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.linklist-tiny {
+    margin-left: 30px;
+}
+
+.linklist-tiny li {
+    padding: 5px 10px;
+}
+
+.linklist-tiny li::before {
+    left: -12px;
+    top: 5px;
+    color: #6d6652;
+    font-size: 10px;
+}
+
+.linklist-tiny a {
+    font-size: 11px;
+    color: #9e9476;
+}
+
+.sublist {
+    display: none;
+    list-style: none;
+    margin: 8px -12px -7px;
+    padding: 0;
+    border-top: 1px solid #4a3927;
+    background: #1b1511;
+}
+
+.linklist li:hover .sublist {
+    display: block;
+}
+
+.sublist li {
+    padding: 5px 12px;
+    text-align: left;
+    border-bottom: 1px dotted #35291d;
+}
+
+.sublist li:last-child {
+    border-bottom: none;
+}
+
+.sublist a {
+    font-size: 11px;
+    color: #b2a47b;
+}
+
+.sublist a:hover {
+    color: #fff1a8;
+}
+
+#searchfield {
+    width: 360px;
+    margin: 12px 0 0 110px;
+}
+
+.textinput {
+    width: 320px;
+    padding: 3px;
+    background: #1a1511;
+    border: 1px solid #54432d;
+    color: #c7ba95;
+    font: 12px "Courier New", monospace;
+}
+
+.submitinput {
+    width: 28px;
+    padding: 3px;
+    background: #2a2119;
+    border: 1px solid #54432d;
+    color: #d8c77b;
+    font: bold 12px Tahoma, sans-serif;
+}
+
+.submitinput:hover {
+    background: #3a2c20;
+    cursor: pointer;
+}
+
+#badges {
+    width: 360px;
+    margin: 25px 0 20px 110px;
+    padding-top: 8px;
+    text-align: center;
+    border-top: 1px dotted #54432d;
+}
+
+.badge {
+    display: inline-block;
+    margin: 2px;
+    padding: 2px 5px;
+    background: #211913;
+    border: 1px solid #54432d;
+    color: #a29472;
+    font: 10px "Courier New", monospace;
+}
+
+.blink {
+    color: #ff8d6d;
+}
