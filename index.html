@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VITRINE — start</title>
+<meta name="description" content="A glass-paned technical start page: top 4chan threads, quicklinks and live system telemetry.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-blur="true">
+
+  <div class="bg-photo" aria-hidden="true"></div>
+  <div class="bg-scrim" aria-hidden="true"></div>
+  <div class="bg-noise" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <div class="clock-block">
+      <span class="time" id="clockTime">00:00</span>
+      <span class="date" id="clockDate">—</span>
+    </div>
+
+    <form class="search-glass glass-panel" id="searchForm" role="search">
+      <svg class="search-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+        <circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/>
+        <line x1="21" y1="21" x2="16.65" y2="16.65" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <input id="searchInput" type="text" autocomplete="off" placeholder="search the open web…" aria-label="Web search">
+      <button type="submit" class="glass-button search-submit">go</button>
+    </form>
+
+    <div class="topbar-right">
+      <p class="eyebrow">VITRINE</p>
+      <p class="greeting" id="greeting">good day.</p>
+    </div>
+  </header>
+
+  <main class="dashboard">
+
+    <section class="threads-panel glass-panel" aria-labelledby="threadsHeading">
+      <div class="panel-head">
+        <div>
+          <p class="panel-eyebrow">live · imageboard</p>
+          <h2 id="threadsHeading">Highest Threads</h2>
+        </div>
+        <div class="panel-controls">
+          <div class="board-chips" id="boardChips" role="group" aria-label="Boards to include"></div>
+          <button class="glass-icon-btn" id="refreshThreads" title="Refresh threads" aria-label="Refresh threads">
+            <svg viewBox="0 0 24 24" width="15" height="15"><path fill="currentColor" d="M12 5V2L8 6l4 4V7c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46A7.93 7.93 0 0020 13c0-4.42-3.58-8-8-8zm-6.7 1.2L3.84 4.74A7.93 7.93 0 004 13c0 4.42 3.58 8 8 8v3l4-4-4-4v3c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8z"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="threads-row" id="threadsRow">
+        <div class="thread-skeleton"></div>
+        <div class="thread-skeleton"></div>
+        <div class="thread-skeleton"></div>
+        <div class="thread-skeleton"></div>
+      </div>
+      <p class="panel-foot" id="threadsMeta">fetching catalog…</p>
+    </section>
+
+    <aside class="side-column">
+
+      <section class="quicklinks-panel glass-panel" aria-labelledby="linksHeading">
+        <div class="panel-head">
+          <div>
+            <p class="panel-eyebrow">pinned</p>
+            <h2 id="linksHeading">Quicklinks</h2>
+          </div>
+          <button class="glass-icon-btn" id="addLinkBtn" title="Add a link" aria-label="Add a link">
+            <svg viewBox="0 0 24 24" width="15" height="15"><path fill="currentColor" d="M11 5h2v6h6v2h-6v6h-2v-6H5v-2h6z"/></svg>
+          </button>
+        </div>
+
+        <form class="add-link-form" id="addLinkForm" hidden>
+          <input id="linkName" placeholder="label" autocomplete="off" required>
+          <input id="linkUrl" placeholder="https://example.com" autocomplete="off" required>
+          <button type="submit" class="glass-button small">pin</button>
+          <button type="button" class="glass-button small ghost" id="cancelLink">cancel</button>
+        </form>
+
+        <div class="quicklinks-grid" id="quicklinksGrid"></div>
+      </section>
+
+      <section class="sysinfo-panel glass-panel" aria-labelledby="sysHeading">
+        <div class="panel-head">
+          <div>
+            <p class="panel-eyebrow" id="sysBadge">telemetry</p>
+            <h2 id="sysHeading">This Machine</h2>
+          </div>
+          <span class="pulse-dot" title="live"></span>
+        </div>
+        <dl class="sysinfo-grid" id="sysInfoGrid"></dl>
+      </section>
+
+      <section class="settings-panel glass-panel" aria-labelledby="setHeading">
+        <div class="panel-head">
+          <div>
+            <p class="panel-eyebrow">preferences</p>
+            <h2 id="setHeading">Settings</h2>
+          </div>
+        </div>
+
+        <div class="setting-row">
+          <div>
+            <span class="setting-label">Auto-refresh threads</span>
+            <span class="setting-sub">every 5 minutes</span>
+          </div>
+          <button class="glass-toggle" id="toggleAutoRefresh" role="switch" aria-checked="false" aria-label="Auto-refresh threads">
+            <span class="knob"></span>
+          </button>
+        </div>
+
+        <div class="setting-row">
+          <div>
+            <span class="setting-label">Background blur</span>
+            <span class="setting-sub">focus mode</span>
+          </div>
+          <button class="glass-toggle" id="toggleBlur" role="switch" aria-checked="true" aria-label="Toggle background blur">
+            <span class="knob"></span>
+          </button>
+        </div>
+
+        <div class="setting-row">
+          <div>
+            <span class="setting-label">Show NSFW boards</span>
+            <span class="setting-sub">catalog filter</span>
+          </div>
+          <button class="glass-toggle" id="toggleNSFW" role="switch" aria-checked="false" aria-label="Show NSFW boards">
+            <span class="knob"></span>
+          </button>
+        </div>
+      </section>
+
+    </aside>
+  </main>
+
+  <footer class="statusbar">
+    <span id="statusLeft">vitrine · static · no backend</span>
+    <span id="statusRight">—</span>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
