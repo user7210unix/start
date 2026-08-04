@@ -1,20 +1,11 @@
-/* ============================================================
-   VITRINE — app.js
-   Fully static / client-side. No backend, no build step.
-   ============================================================ */
-
 (() => {
   "use strict";
 
-  /* ---------------- proxy ----------------
-     4chan's API/CDN does not send CORS headers that satisfy every
-     origin, so all reads (catalog JSON + every image) go through
-     a small worker that mirrors the response with an open CORS header. */
 
   const PROXY = "https://chan-proxy.anonnousmes.workers.dev/?url=";
   const proxied = (url) => PROXY + encodeURIComponent(url);
 
-  /* ---------------- storage helpers ---------------- */
+  /* . storage helpers . */
 
   const store = {
     get(key, fallback) {
@@ -30,7 +21,7 @@
     }
   };
 
-  /* ---------------- defaults ---------------- */
+  /* . defaults . */
 
   const ALL_BOARDS = [
     { id: "g",   nsfw: false, label: "/g/" },
@@ -58,10 +49,43 @@
   let activeBoards = store.get("vitrine.boards", DEFAULT_ACTIVE_BOARDS);
   let links = store.get("vitrine.links", DEFAULT_LINKS);
   let settings = store.get("vitrine.settings", { autoRefresh: false, blur: true, nsfw: false });
+  let wallpaper = store.get("vitrine.wallpaper", null);
 
   let refreshTimer = null;
 
-  /* ---------------- clock ---------------- */
+  /* . wallpaper . */
+
+  function applyWallpaper() {
+    if (wallpaper) {
+      document.documentElement.style.setProperty("--bg-image", `url('${wallpaper}')`);
+    } else {
+      document.documentElement.style.removeProperty("--bg-image");
+    }
+  }
+
+  const wallpaperForm = document.getElementById("wallpaperForm");
+  const wallpaperInput = document.getElementById("wallpaperUrl");
+  wallpaperInput.value = wallpaper || "";
+
+  wallpaperForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const val = wallpaperInput.value.trim();
+    if (!val) return;
+    wallpaper = val;
+    store.set("vitrine.wallpaper", wallpaper);
+    applyWallpaper();
+  });
+
+  document.getElementById("wallpaperReset").addEventListener("click", () => {
+    wallpaper = null;
+    wallpaperInput.value = "";
+    store.set("vitrine.wallpaper", null);
+    applyWallpaper();
+  });
+
+  applyWallpaper();
+
+  /* . clock . */
 
   function tickClock() {
     const now = new Date();
@@ -82,13 +106,151 @@
   tickClock();
   setInterval(tickClock, 15000);
 
-  /* ---------------- search ---------------- */
+  /* . search . */
 
-  document.getElementById("searchForm").addEventListener("submit", (e) => {
+  const searchForm = document.getElementById("searchForm");
+  const searchInput = document.getElementById("searchInput");
+  const searchWrap = document.getElementById("searchWrap");
+  const searchSuggest = document.getElementById("searchSuggest");
+
+  searchForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    const q = document.getElementById("searchInput").value.trim();
+    const q = searchInput.value.trim();
     if (!q) return;
     window.open(`https://www.google.com/search?q=${encodeURIComponent(q)}`, "_blank", "noopener,noreferrer");
+  });
+
+  // spacebar opens + focuses search from anywhere, unless the person is
+  // already typing into an input, textarea, or contenteditable field.
+  document.addEventListener("keydown", (e) => {
+    if (e.code !== "Space" || e.metaKey || e.ctrlKey || e.altKey) return;
+    const el = document.activeElement;
+    // only steal the spacebar when nothing else is focused — buttons,
+    // toggles, and chips all use space themselves and must keep working.
+    const idle = !el || el === document.body;
+    if (!idle) return;
+    e.preventDefault();
+    searchInput.focus();
+    searchForm.classList.remove("search-pop");
+    // eslint-disable-next-line no-unused-expressions
+    void searchForm.offsetWidth; // restart animation
+    searchForm.classList.add("search-pop");
+  });
+
+  /* . IDE-style autosuggest . */
+
+  const SITES = [
+    { name: "youtube",    aliases: ["yt"],           icon: "fa-brands fa-youtube",        url: "https://youtube.com" },
+    { name: "google",     aliases: ["g"],             icon: "fa-brands fa-google",         url: "https://google.com" },
+    { name: "gmail",      aliases: ["mail"],          icon: "fa-solid fa-envelope",        url: "https://mail.google.com" },
+    { name: "github",     aliases: ["gh"],            icon: "fa-brands fa-github",         url: "https://github.com" },
+    { name: "reddit",     aliases: [],                icon: "fa-brands fa-reddit-alien",   url: "https://reddit.com" },
+    { name: "x",          aliases: ["twitter"],       icon: "fa-brands fa-x-twitter",      url: "https://x.com" },
+    { name: "4chan",      aliases: ["chan"],          icon: "fa-solid fa-trash",            url: "https://www.4chan.org" },
+    { name: "wikipedia",  aliases: ["wiki"],          icon: "fa-brands fa-wikipedia-w",    url: "https://wikipedia.org" },
+    { name: "amazon",     aliases: [],                icon: "fa-brands fa-amazon",         url: "https://amazon.com" },
+    { name: "twitch",     aliases: [],                icon: "fa-brands fa-twitch",         url: "https://twitch.tv" },
+    { name: "discord",    aliases: [],                icon: "fa-brands fa-discord",        url: "https://discord.com/app" },
+    { name: "spotify",    aliases: [],                icon: "fa-brands fa-spotify",        url: "https://open.spotify.com" },
+    { name: "instagram",  aliases: ["ig"],            icon: "fa-brands fa-instagram",      url: "https://instagram.com" },
+    { name: "facebook",   aliases: ["fb"],            icon: "fa-brands fa-facebook",       url: "https://facebook.com" },
+    { name: "tiktok",     aliases: [],                icon: "fa-brands fa-tiktok",         url: "https://tiktok.com" },
+    { name: "linkedin",   aliases: [],                icon: "fa-brands fa-linkedin",       url: "https://linkedin.com" },
+    { name: "pinterest",  aliases: [],                icon: "fa-brands fa-pinterest",      url: "https://pinterest.com" },
+    { name: "stackoverflow", aliases: ["so"],         icon: "fa-brands fa-stack-overflow", url: "https://stackoverflow.com" },
+    { name: "whatsapp",   aliases: ["wa"],            icon: "fa-brands fa-whatsapp",       url: "https://web.whatsapp.com" },
+    { name: "telegram",   aliases: ["tg"],            icon: "fa-brands fa-telegram",       url: "https://web.telegram.org" },
+    { name: "steam",      aliases: [],                icon: "fa-brands fa-steam",          url: "https://store.steampowered.com" },
+    { name: "imgur",      aliases: [],                icon: "fa-brands fa-imgur",          url: "https://imgur.com" },
+    { name: "netflix",    aliases: [],                icon: "fa-solid fa-clapperboard",    url: "https://netflix.com" },
+    { name: "protonmail", aliases: ["proton"],        icon: "fa-solid fa-shield-halved",   url: "https://mail.proton.me" },
+  ];
+
+  let matches = [];
+  let activeIndex = -1;
+
+  function scoreMatch(site, q) {
+    const names = [site.name, ...(site.aliases || [])];
+    let best = 0;
+    names.forEach((n) => {
+      if (n === q) best = Math.max(best, 100);
+      else if (n.startsWith(q)) best = Math.max(best, 80);
+      else if (n.includes(q)) best = Math.max(best, 40);
+    });
+    return best;
+  }
+
+  function findMatches(q) {
+    q = q.trim().toLowerCase();
+    if (!q) return [];
+    return SITES
+      .map((s) => ({ site: s, score: scoreMatch(s, q) }))
+      .filter((x) => x.score > 0)
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 6)
+      .map((x) => x.site);
+  }
+
+  function renderSuggestions() {
+    if (matches.length === 0) {
+      searchSuggest.hidden = true;
+      searchSuggest.innerHTML = "";
+      return;
+    }
+    searchSuggest.hidden = false;
+    searchSuggest.innerHTML = "";
+    matches.forEach((site, i) => {
+      const item = document.createElement("div");
+      item.className = "suggest-item" + (i === activeIndex ? " active" : "");
+      item.innerHTML = `
+        <i class="${site.icon}" aria-hidden="true"></i>
+        <span class="suggest-name">${site.name}</span>
+        <span class="suggest-url">${site.url.replace(/^https?:\/\//, "")}</span>`;
+      item.addEventListener("mousedown", (e) => {
+        e.preventDefault();
+        goToSite(site);
+      });
+      searchSuggest.appendChild(item);
+    });
+  }
+
+  function goToSite(site) {
+    window.location.href = site.url;
+  }
+
+  function closeSuggestions() {
+    matches = [];
+    activeIndex = -1;
+    searchSuggest.hidden = true;
+    searchSuggest.innerHTML = "";
+  }
+
+  searchInput.addEventListener("input", () => {
+    matches = findMatches(searchInput.value);
+    activeIndex = -1;
+    renderSuggestions();
+  });
+
+  searchInput.addEventListener("keydown", (e) => {
+    if (searchSuggest.hidden || matches.length === 0) return;
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      activeIndex = Math.min(activeIndex + 1, matches.length - 1);
+      renderSuggestions();
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      activeIndex = Math.max(activeIndex - 1, -1);
+      renderSuggestions();
+    } else if (e.key === "Enter" && activeIndex >= 0) {
+      e.preventDefault();
+      goToSite(matches[activeIndex]);
+    } else if (e.key === "Escape") {
+      closeSuggestions();
+    }
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!searchWrap.contains(e.target)) closeSuggestions();
   });
 
   /* ============================================================
@@ -144,12 +306,14 @@
 
   async function loadThreads() {
     const row = document.getElementById("threadsRow");
+    const list = document.getElementById("threadsList");
     const meta = document.getElementById("threadsMeta");
     row.innerHTML = `
       <div class="thread-skeleton"></div>
       <div class="thread-skeleton"></div>
       <div class="thread-skeleton"></div>
       <div class="thread-skeleton"></div>`;
+    list.innerHTML = "";
     meta.textContent = "fetching catalog…";
 
     if (activeBoards.length === 0) {
@@ -163,6 +327,9 @@
 
     all.sort((a, b) => (b.replies || 0) - (a.replies || 0));
     const top = all.slice(0, 4);
+    // the rest fills the panel's remaining height as a compact ranked list
+    // instead of leaving it empty — this is the real catalog, not just 4 cards.
+    const rest = all.slice(4, 24);
 
     if (top.length === 0) {
       row.innerHTML = `<p class="panel-foot" style="grid-column:1/-1;">couldn't reach the catalog. try again shortly.</p>`;
@@ -173,8 +340,42 @@
     row.innerHTML = "";
     top.forEach(t => row.appendChild(buildThreadCard(t)));
 
+    list.innerHTML = "";
+    rest.forEach((t, i) => list.appendChild(buildThreadListItem(t, i + 5)));
+
     const now = new Date();
-    meta.textContent = `${top.length} of ${activeBoards.length} boards · updated ${now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" })}`;
+    meta.textContent = `${top.length + rest.length} of ${all.length} threads · ${activeBoards.length} boards · updated ${now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" })}`;
+  }
+
+  function buildThreadListItem(t, rank) {
+    const a = document.createElement("a");
+    a.className = "thread-list-item";
+    a.href = `https://boards.4chan.org/${t.board}/thread/${t.no}`;
+    a.target = "_blank";
+    a.rel = "noopener noreferrer";
+    a.style.animationDelay = `${Math.min(rank - 5, 10) * 0.02}s`;
+
+    const rankEl = document.createElement("span");
+    rankEl.className = "thread-list-rank";
+    rankEl.textContent = rank;
+
+    const boardEl = document.createElement("span");
+    boardEl.className = "thread-list-board";
+    boardEl.textContent = `/${t.board}/`;
+
+    const subjectEl = document.createElement("span");
+    subjectEl.className = "thread-list-subject";
+    subjectEl.textContent = stripHtml(t.sub) || stripHtml(t.com).slice(0, 90) || "untitled thread";
+
+    const repliesEl = document.createElement("span");
+    repliesEl.className = "thread-list-replies";
+    repliesEl.textContent = `${t.replies || 0} replies`;
+
+    a.appendChild(rankEl);
+    a.appendChild(boardEl);
+    a.appendChild(subjectEl);
+    a.appendChild(repliesEl);
+    return a;
   }
 
   function buildThreadCard(t) {
@@ -437,29 +638,32 @@
     return { os: platform || "unknown", kernel: "unknown", arch: platform || "unknown" };
   }
 
-  function getWebGLRenderer() {
-    try {
-      const canvas = document.createElement("canvas");
-      const gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
-      if (!gl) return null;
-      const ext = gl.getExtension("WEBGL_debug_renderer_info");
-      if (!ext) return gl.getParameter(gl.RENDERER);
-      return gl.getParameter(ext.UNMASKED_RENDERER_WEBGL);
-    } catch {
-      return null;
-    }
+  // Rough, honest-about-being-a-guess load estimate: time a fixed chunk of
+  // work and compare it against the fastest run this browser has ever seen
+  // on this machine. Slower-than-usual means something else is busy.
+  function estimateLoad() {
+    const iterations = 1_500_000;
+    const start = performance.now();
+    let x = 0;
+    for (let i = 0; i < iterations; i++) x += Math.sqrt(i);
+    const elapsed = performance.now() - start;
+
+    const baseline = store.get("vitrine.cpuBaseline", elapsed);
+    const fastest = Math.min(baseline, elapsed);
+    store.set("vitrine.cpuBaseline", fastest);
+
+    const load = Math.max(0, Math.min(96, Math.round(((elapsed - fastest) / fastest) * 100)));
+    return load;
   }
 
-  function getBattery() {
-    return new Promise((resolve) => {
-      if (navigator.getBattery) {
-        navigator.getBattery().then(b => {
-          resolve(`${Math.round(b.level * 100)}%${b.charging ? " ⚡" : ""}`);
-        }).catch(() => resolve(null));
-      } else {
-        resolve(null);
-      }
-    });
+  function vibeLine(load, threads) {
+    let mood;
+    if (load < 12) mood = "barely awake";
+    else if (load < 30) mood = "cruising along";
+    else if (load < 55) mood = "working for it";
+    else if (load < 80) mood = "getting warm";
+    else mood = "sweating bullets";
+    return `CPU sitting at ${load}% — ${mood}, ${threads || "a few"} threads on tap.`;
   }
 
   async function renderSysInfo() {
@@ -467,31 +671,19 @@
     const platform = navigator.platform || "unknown";
     const grid = document.getElementById("sysInfoGrid");
 
-    const [{ os, kernel, arch }, battery] = await Promise.all([detectOS(ua, platform), getBattery()]);
-
-    const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-    const gpu = getWebGLRenderer();
+    const { os, kernel, arch } = await detectOS(ua, platform);
     const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
     const offset = -new Date().getTimezoneOffset() / 60;
+    const threads = navigator.hardwareConcurrency || null;
+    const load = estimateLoad();
 
     const rows = [
       ["OS", os],
       ["Kernel", kernel],
       ["Architecture", arch || "n/a"],
       ["Browser", detectBrowser(ua)],
-      ["CPU threads", navigator.hardwareConcurrency ? `${navigator.hardwareConcurrency} threads` : "n/a"],
-      ["Memory (approx)", navigator.deviceMemory ? `${navigator.deviceMemory} GB+` : "n/a"],
-      ["GPU", gpu ? gpu.slice(0, 34) : "masked / n/a"],
-      ["Screen", `${screen.width}×${screen.height} @${window.devicePixelRatio}x`],
-      ["Color depth", `${screen.colorDepth}-bit`],
-      ["Viewport", `${window.innerWidth}×${window.innerHeight}`],
+      ["CPU threads", threads ? `${threads} threads` : "n/a"],
       ["Timezone", `${tz} (UTC${offset >= 0 ? "+" : ""}${offset})`],
-      ["Language", navigator.languages ? navigator.languages.slice(0, 2).join(", ") : navigator.language],
-      ["Network", conn ? `${conn.effectiveType || "?"}${conn.downlink ? " · " + conn.downlink + "Mb/s" : ""}` : "n/a"],
-      ["Battery", battery || "n/a"],
-      ["Touch points", navigator.maxTouchPoints ?? 0],
-      ["Cookies", navigator.cookieEnabled ? "enabled" : "disabled"],
-      ["Online", navigator.onLine ? "yes" : "no"],
     ];
 
     grid.innerHTML = "";
@@ -504,6 +696,7 @@
       grid.appendChild(dd);
     });
 
+    document.getElementById("machineVibe").textContent = vibeLine(load, threads);
     document.getElementById("sysBadge").textContent = `telemetry · ${os.split(" ")[0].toLowerCase()}`;
     document.getElementById("statusRight").textContent = `${os} · ${detectBrowser(ua)}`;
   }
@@ -546,7 +739,7 @@
 
   document.body.dataset.blur = String(settings.blur);
 
-  /* ---------------- boot ---------------- */
+  /* . boot . */
 
   renderBoardChips();
   renderLinks();
