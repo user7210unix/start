@@ -3,11 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>start</title>
+<title>VITRINE — start</title>
 <meta name="description" content="A glass-paned technical start page: top 4chan threads, quicklinks and live system telemetry.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <link rel="stylesheet" href="style.css">
 </head>
 <body data-blur="true">
@@ -22,14 +24,18 @@
       <span class="date" id="clockDate">—</span>
     </div>
 
-    <form class="search-glass glass-panel" id="searchForm" role="search">
-      <svg class="search-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
-        <circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/>
-        <line x1="21" y1="21" x2="16.65" y2="16.65" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-      </svg>
-      <input id="searchInput" type="text" autocomplete="off" placeholder="search the open web…" aria-label="Web search">
-      <button type="submit" class="glass-button search-submit">go</button>
-    </form>
+    <div class="search-wrap" id="searchWrap">
+      <form class="search-glass glass-panel" id="searchForm" role="search" autocomplete="off">
+        <svg class="search-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+          <circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/>
+          <line x1="21" y1="21" x2="16.65" y2="16.65" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <input id="searchInput" type="text" autocomplete="off" placeholder="search the open web…" aria-label="Web search">
+        <kbd class="search-kbd" id="searchKbd">space</kbd>
+        <button type="submit" class="glass-button search-submit">go</button>
+      </form>
+      <div class="search-suggest glass-panel" id="searchSuggest" hidden></div>
+    </div>
 
     <div class="topbar-right">
       <p class="eyebrow">VITRINE</p>
@@ -58,6 +64,7 @@
         <div class="thread-skeleton"></div>
         <div class="thread-skeleton"></div>
       </div>
+      <div class="threads-list" id="threadsList"></div>
       <p class="panel-foot" id="threadsMeta">fetching catalog…</p>
     </section>
 
@@ -92,6 +99,7 @@
           </div>
           <span class="pulse-dot" title="live"></span>
         </div>
+        <p class="machine-vibe" id="machineVibe">reading the room…</p>
         <dl class="sysinfo-grid" id="sysInfoGrid"></dl>
       </section>
 
@@ -132,6 +140,18 @@
             <span class="knob"></span>
           </button>
         </div>
+
+        <div class="setting-row wallpaper-row">
+          <div>
+            <span class="setting-label">Custom wallpaper</span>
+            <span class="setting-sub">paste an image URL</span>
+          </div>
+        </div>
+        <form class="wallpaper-form" id="wallpaperForm">
+          <input id="wallpaperUrl" placeholder="https://…/wallpaper.jpg" autocomplete="off" inputmode="url">
+          <button type="submit" class="glass-button small">set</button>
+          <button type="button" class="glass-button small ghost" id="wallpaperReset">reset</button>
+        </form>
       </section>
 
     </aside>
