@@ -1,167 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VITRINE — start</title>
-<meta name="description" content="A glass-paned technical start page: top 4chan threads, quicklinks and live system telemetry.">
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
-<body data-blur="true">
+<body>
+  <div class="grain"></div>
 
-  <div class="bg-photo" aria-hidden="true"></div>
-  <div class="bg-scrim" aria-hidden="true"></div>
-  <div class="bg-noise" aria-hidden="true"></div>
+  <div class="shell">
 
-  <header class="topbar">
-    <div class="clock-block">
-      <span class="time" id="clockTime">00:00</span>
-      <span class="date" id="clockDate">—</span>
-    </div>
-
-    <div class="search-wrap" id="searchWrap">
-      <form class="search-glass glass-panel" id="searchForm" role="search" autocomplete="off">
-        <svg class="search-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
-          <circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/>
-          <line x1="21" y1="21" x2="16.65" y2="16.65" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-        </svg>
-        <input id="searchInput" type="text" autocomplete="off" placeholder="search the open web…" aria-label="Web search">
-        <kbd class="search-kbd" id="searchKbd">space</kbd>
-        <button type="submit" class="glass-button search-submit">go</button>
-      </form>
-      <div class="search-suggest glass-panel" id="searchSuggest" hidden></div>
-    </div>
-
-    <div class="topbar-right">
-      <p class="eyebrow">VITRINE</p>
-      <p class="greeting" id="greeting">good day.</p>
-    </div>
-  </header>
-
-  <main class="dashboard">
-
-    <section class="threads-panel glass-panel" aria-labelledby="threadsHeading">
-      <div class="panel-head">
-        <div>
-          <p class="panel-eyebrow">live · imageboard</p>
-          <h2 id="threadsHeading">Highest Threads</h2>
-        </div>
-        <div class="panel-controls">
-          <div class="board-chips" id="boardChips" role="group" aria-label="Boards to include"></div>
-          <button class="glass-icon-btn" id="refreshThreads" title="Refresh threads" aria-label="Refresh threads">
-            <svg viewBox="0 0 24 24" width="15" height="15"><path fill="currentColor" d="M12 5V2L8 6l4 4V7c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46A7.93 7.93 0 0020 13c0-4.42-3.58-8-8-8zm-6.7 1.2L3.84 4.74A7.93 7.93 0 004 13c0 4.42 3.58 8 8 8v3l4-4-4-4v3c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8z"/></svg>
-          </button>
+    <aside class="hero">
+      <div class="hero-top">
+        <div class="hero-weather">
+          <div class="hero-icon" id="weather-icon" aria-hidden="true"></div>
+          <div class="hero-readout">
+            <div class="hero-temp" id="weather-temp">--°</div>
+            <div class="hero-cond" id="weather-cond">loading weather</div>
+          </div>
         </div>
       </div>
-      <div class="threads-row" id="threadsRow">
-        <div class="thread-skeleton"></div>
-        <div class="thread-skeleton"></div>
-        <div class="thread-skeleton"></div>
-        <div class="thread-skeleton"></div>
+
+      <div class="hero-bottom">
+        <div class="clock">
+          <div class="time" id="time">--:--</div>
+          <div class="date" id="date">—</div>
+        </div>
+        <div class="location" id="weather-loc">—</div>
       </div>
-      <div class="threads-list" id="threadsList"></div>
-      <p class="panel-foot" id="threadsMeta">fetching catalog…</p>
-    </section>
-
-    <aside class="side-column">
-
-      <section class="quicklinks-panel glass-panel" aria-labelledby="linksHeading">
-        <div class="panel-head">
-          <div>
-            <p class="panel-eyebrow">pinned</p>
-            <h2 id="linksHeading">Quicklinks</h2>
-          </div>
-          <button class="glass-icon-btn" id="addLinkBtn" title="Add a link" aria-label="Add a link">
-            <svg viewBox="0 0 24 24" width="15" height="15"><path fill="currentColor" d="M11 5h2v6h6v2h-6v6h-2v-6H5v-2h6z"/></svg>
-          </button>
-        </div>
-
-        <form class="add-link-form" id="addLinkForm" hidden>
-          <input id="linkName" placeholder="label" autocomplete="off" required>
-          <input id="linkUrl" placeholder="https://example.com" autocomplete="off" required>
-          <button type="submit" class="glass-button small">pin</button>
-          <button type="button" class="glass-button small ghost" id="cancelLink">cancel</button>
-        </form>
-
-        <div class="quicklinks-grid" id="quicklinksGrid"></div>
-      </section>
-
-      <section class="sysinfo-panel glass-panel" aria-labelledby="sysHeading">
-        <div class="panel-head">
-          <div>
-            <p class="panel-eyebrow" id="sysBadge">telemetry</p>
-            <h2 id="sysHeading">This Machine</h2>
-          </div>
-          <span class="pulse-dot" title="live"></span>
-        </div>
-        <p class="machine-vibe" id="machineVibe">reading the room…</p>
-        <dl class="sysinfo-grid" id="sysInfoGrid"></dl>
-      </section>
-
-      <section class="settings-panel glass-panel" aria-labelledby="setHeading">
-        <div class="panel-head">
-          <div>
-            <p class="panel-eyebrow">preferences</p>
-            <h2 id="setHeading">Settings</h2>
-          </div>
-        </div>
-
-        <div class="setting-row">
-          <div>
-            <span class="setting-label">Auto-refresh threads</span>
-            <span class="setting-sub">every 5 minutes</span>
-          </div>
-          <button class="glass-toggle" id="toggleAutoRefresh" role="switch" aria-checked="false" aria-label="Auto-refresh threads">
-            <span class="knob"></span>
-          </button>
-        </div>
-
-        <div class="setting-row">
-          <div>
-            <span class="setting-label">Background blur</span>
-            <span class="setting-sub">focus mode</span>
-          </div>
-          <button class="glass-toggle" id="toggleBlur" role="switch" aria-checked="true" aria-label="Toggle background blur">
-            <span class="knob"></span>
-          </button>
-        </div>
-
-        <div class="setting-row">
-          <div>
-            <span class="setting-label">Show NSFW boards</span>
-            <span class="setting-sub">catalog filter</span>
-          </div>
-          <button class="glass-toggle" id="toggleNSFW" role="switch" aria-checked="false" aria-label="Show NSFW boards">
-            <span class="knob"></span>
-          </button>
-        </div>
-
-        <div class="setting-row wallpaper-row">
-          <div>
-            <span class="setting-label">Custom wallpaper</span>
-            <span class="setting-sub">paste an image URL</span>
-          </div>
-        </div>
-        <form class="wallpaper-form" id="wallpaperForm">
-          <input id="wallpaperUrl" placeholder="https://…/wallpaper.jpg" autocomplete="off" inputmode="url">
-          <button type="submit" class="glass-button small">set</button>
-          <button type="button" class="glass-button small ghost" id="wallpaperReset">reset</button>
-        </form>
-      </section>
-
     </aside>
-  </main>
 
-  <footer class="statusbar">
-    <span id="statusLeft">vitrine · static · no backend</span>
-    <span id="statusRight">—</span>
-  </footer>
+    <main class="content">
 
-  <script src="app.js"></script>
+      <div class="search">
+        <svg class="search-icon" viewBox="0 0 512 512" aria-hidden="true">
+          <path d="M456.7 466.7L362.7 372.7C334.1 396.5 297.4 410.7 257.3 410.7C165.7 410.7 91.3 336.3 91.3 244.7C91.3 153 165.7 78.7 257.3 78.7C349 78.7 423.3 153 423.3 244.7C423.3 284.8 409.1 321.5 385.3 350.1L479.3 444.1C488.7 453.4 488.7 468.6 479.3 477.9C470 487.2 454.8 487.2 445.5 477.9L456.7 466.7ZM138.7 244.7C138.7 310 191.9 363.3 257.3 363.3C322.7 363.3 375.9 310 375.9 244.7C375.9 179.3 322.7 126.1 257.3 126.1C191.9 126.1 138.7 179.3 138.7 244.7Z"/>
+        </svg>
+        <form action="https://www.startpage.com/sp/search" method="get" target="_blank" rel="noopener noreferrer">
+          <input type="text" name="query" placeholder="search the web" autocomplete="off" autofocus>
+          <button type="submit">go →</button>
+        </form>
+      </div>
+
+      <div class="section-row">
+        <div class="section">quick links</div>
+        <div class="section-count" id="link-count"></div>
+      </div>
+
+      <div class="tree-grid" id="links"></div>
+
+    </main>
+
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
