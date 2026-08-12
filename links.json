@@ -1,0 +1,20 @@
+[
+  { "name": "/b/",          "url": "https://ourchan.org/b/",                 "tag": "ourchan" },
+  { "name": "devdocs",      "url": "https://devdocs.io/",                    "tag": "docs" },
+  { "name": "startpage",    "url": "https://www.startpage.com",              "tag": "search" },
+  { "name": "youtube",      "url": "https://www.youtube.com",                "tag": "video" },
+  { "name": "github",       "url": "https://github.com",                     "tag": "code" },
+  { "name": "archwiki",     "url": "https://wiki.archlinux.org/",            "tag": "wiki" },
+  { "name": "gentoo wiki",  "url": "https://wiki.gentoo.org/",               "tag": "wiki" },
+  { "name": "mdn",          "url": "https://developer.mozilla.org/",         "tag": "web" },
+  { "name": "caniuse",      "url": "https://caniuse.com/",                   "tag": "web" },
+  { "name": "cppreference", "url": "https://en.cppreference.com/",           "tag": "cpp" },
+  { "name": "manpages",     "url": "https://man.archlinux.org/",             "tag": "man" },
+  { "name": "pkgs",         "url": "https://pkgs.org/",                      "tag": "packages" },
+  { "name": "libgen",       "url": "https://libgen.is/",                     "tag": "books" },
+  { "name": "annas",        "url": "https://annas-archive.org/",             "tag": "books" },
+  { "name": "reddit",       "url": "https://www.reddit.com/r/unixporn/",     "tag": "rice" },
+  { "name": "lobsters",     "url": "https://lobste.rs/",                     "tag": "news" },
+  { "name": "hn",           "url": "https://news.ycombinator.com/",          "tag": "news" },
+  { "name": "tilde",        "url": "https://tilde.club/",                    "tag": "tilde" }
+]
