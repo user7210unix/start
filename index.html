@@ -1,62 +1,30 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+<meta charset="utf-8">
+<title>start</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="grain"></div>
-
-  <div class="shell">
-
-    <aside class="hero">
-      <div class="hero-top">
-        <div class="hero-weather">
-          <div class="hero-icon" id="weather-icon" aria-hidden="true"></div>
-          <div class="hero-readout">
-            <div class="hero-temp" id="weather-temp">--°</div>
-            <div class="hero-cond" id="weather-cond">loading weather</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="hero-bottom">
-        <div class="clock">
-          <div class="time" id="time">--:--</div>
-          <div class="date" id="date">—</div>
-        </div>
-        <div class="location" id="weather-loc">—</div>
-      </div>
-    </aside>
-
-    <main class="content">
-
-      <div class="search">
-        <svg class="search-icon" viewBox="0 0 512 512" aria-hidden="true">
-          <path d="M456.7 466.7L362.7 372.7C334.1 396.5 297.4 410.7 257.3 410.7C165.7 410.7 91.3 336.3 91.3 244.7C91.3 153 165.7 78.7 257.3 78.7C349 78.7 423.3 153 423.3 244.7C423.3 284.8 409.1 321.5 385.3 350.1L479.3 444.1C488.7 453.4 488.7 468.6 479.3 477.9C470 487.2 454.8 487.2 445.5 477.9L456.7 466.7ZM138.7 244.7C138.7 310 191.9 363.3 257.3 363.3C322.7 363.3 375.9 310 375.9 244.7C375.9 179.3 322.7 126.1 257.3 126.1C191.9 126.1 138.7 179.3 138.7 244.7Z"/>
-        </svg>
-        <form action="https://www.startpage.com/sp/search" method="get" target="_blank" rel="noopener noreferrer">
-          <input type="text" name="query" placeholder="search the web" autocomplete="off" autofocus>
-          <button type="submit">go →</button>
-        </form>
-      </div>
-
-      <div class="section-row">
-        <div class="section">quick links</div>
-        <div class="section-count" id="link-count"></div>
-      </div>
-
-      <div class="tree-grid" id="links"></div>
-
-    </main>
-
-  </div>
-
-  <script src="script.js"></script>
+  <main>
+    <div class="columns">
+      <ul class="links">
+        <li><a href="https://duckduckgo.com">duckduckgo</a></li>
+        <li><a href="https://www.youtube.com">youtube</a></li>
+        <li><a href="https://boards.4chan.org/g/">/g/</a></li>
+        <li><a href="https://boards.4chan.org/v/">/v/</a></li>
+        <li><a href="https://boards.4chan.org/b/">/b/</a></li>
+        <li><a href="https://desuarchive.org">desuarchive</a></li>
+      </ul>
+      <ul class="links">
+        <li><a href="https://yandex.com">yandex</a></li>
+        <li><a href="https://catbox.moe">catbox</a></li>
+        <li><a href="https://wikipedia.com">wiki</a></li>
+        <li><a href="https://wiki.archlinux.org">archlinux</a></li>
+        <li><a href="https://mail.proton.me/u/0/inbox">proton mail</a></li>
+        <li><a href="https://github.com/">github</a></li>
+      </ul>
+    </div>
+  </main>
 </body>
 </html>
