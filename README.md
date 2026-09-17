@@ -13,12 +13,8 @@
 ![HTML5](https://img.shields.io/badge/HTML5-08050a?style=flat-square&logo=html5&logoColor=e9d0c6)
 ![CSS3](https://img.shields.io/badge/CSS3-08050a?style=flat-square&logo=css3&logoColor=e9d0c6)
 ![JavaScript](https://img.shields.io/badge/JavaScript-08050a?style=flat-square&logo=javascript&logoColor=e9d0c6)
-![No build step](https://img.shields.io/badge/build%20step-none-400101?style=flat-square)
-![No dependencies](https://img.shields.io/badge/dependencies-zero-400101?style=flat-square)
-![Storage](https://img.shields.io/badge/storage-localStorage-400101?style=flat-square)
 
-[Live demo](https://user7210unix.github.io/start/) · [Report a bug](../../issues)
-
+[Visit](https://user7210unix.github.io/start/)
 </div>
 
 <br />
