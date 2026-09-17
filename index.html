@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>start</title>
+<link rel="icon" href="assets/icons/folder.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Luminance ramp that repaints the purple icon set in wine red. -->
+<svg class="defs" width="0" height="0" aria-hidden="true" focusable="false">
+  <filter id="wine-tint" color-interpolation-filters="sRGB">
+    <feColorMatrix type="saturate" values="0"/>
+    <feComponentTransfer>
+      <feFuncR type="table" tableValues="0.05 0.26 0.55 0.82 0.99"/>
+      <feFuncG type="table" tableValues="0.00 0.03 0.10 0.28 0.68"/>
+      <feFuncB type="table" tableValues="0.00 0.03 0.09 0.24 0.60"/>
+    </feComponentTransfer>
+  </filter>
+</svg>
+
+<div class="shell" id="shell">
+  <section class="window" id="window">
+
+    <div class="titlebar" id="titlebar">
+      <button class="box" data-act="shade" title="Roll up" aria-label="Roll up"></button>
+      <span class="rule"></span>
+      <h1 class="title" id="windowTitle">start</h1>
+      <span class="rule"></span>
+      <button class="box" data-act="zoom" title="Widen" aria-label="Widen"></button>
+    </div>
+
+    <div class="banner">
+      <div class="plate"></div>
+    </div>
+
+    <div class="pathbar">
+      <button class="btn" id="up" disabled aria-label="Back to all folders">&#9664;</button>
+      <nav class="crumbs" id="crumbs" aria-label="Location"></nav>
+    </div>
+
+    <div class="pane" id="pane">
+      <div class="grid" id="grid"></div>
+    </div>
+
+    <div class="actions">
+      <button class="btn" id="addFolder">New folder</button>
+      <button class="btn" id="addSite">New site</button>
+      <span class="spacer"></span>
+      <button class="btn" id="rename" disabled>Rename</button>
+      <button class="btn" id="remove" disabled>Delete</button>
+    </div>
+
+    <div class="statusbar">
+      <span id="count">&nbsp;</span>
+      <span class="target" id="target"></span>
+    </div>
+
+  </section>
+</div>
+
+<div class="scrim" id="scrim" hidden></div>
+
+<script src="script.js"></script>
+</body>
+</html>
